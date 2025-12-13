@@ -86,15 +86,15 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>GLEW_STATIC; WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC; GLFW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependecies\include;$(SolutionDir)Dependecies\include\GLEW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GL;C:\Users\Huawei\source\repos\yutch123\OpenGL\x64\Debug;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLFW;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLEW\lib\Release\x64;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\lib-vc2015;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLEW\lib\Release\Win32;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLFW;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLEW\lib\Release\Win32;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependecies\include\GLEW\lib\Release\Win32;$(SolutionDir)Dependecies\lib-vc2015</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib; opengl32.lib; user32.lib; Gdi32.lib; Shell32.lib; glew32s.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\lib-vc2015;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLFW;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLEW\lib\Release\x64;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLEW\lib\Release\Win32;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLEW\lib\Release\Win32</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;glew32.lib;user32.lib;gdi32.lib;shell32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -103,29 +103,32 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>GLEW_STATIC; WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC; GLFW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependecies\include;$(SolutionDir)Dependecies\include\GLEW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GL;C:\Users\Huawei\source\repos\yutch123\OpenGL\x64\Debug;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLFW;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLEW\lib\Release\x64;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\lib-vc2015;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLEW\lib\Release\Win32;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLFW;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLEW\lib\Release\Win32;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependecies\include\GLEW\lib\Release\Win32;$(SolutionDir)Dependecies\lib-vc2015</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib; opengl32.lib; user32.lib; Gdi32.lib; Shell32.lib; glew32s.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\lib-vc2015;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLFW;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLEW\lib\Release\x64;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLEW\lib\Release\Win32;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLEW\lib\Release\Win32</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;glew32.lib;user32.lib;gdi32.lib;shell32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC; GLFW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\Huawei\Documents\OpenGL\GLFW\glfw-3.4\include;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GL;C:\Users\Huawei\source\repos\yutch123\OpenGL\x64\Debug;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLFW;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLEW\lib\Release\x64;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\lib-vc2015;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLEW\lib\Release\Win32;C:\Users\Huawei\Documents\OpenGL\OpenGL\Dependecies\include\GLFW;C:\Users\Huawei\Documents\OpenGL\OpenGL\Dependecies\include;C:\Users\Huawei\Documents\OpenGL\OpenGL\Dependecies\include\GLEW</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\Huawei\Documents\OpenGL\GLFW\glfw-3.4\build\src\Release;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\lib-vc2015;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLFW;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLEW\lib\Release\x64;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLEW\lib\Release\Win32;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies;C:\Users\Huawei\Documents\OpenGL\OpenGL\Dependecies\include</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;glew32.lib;user32.lib;gdi32.lib;shell32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -134,14 +137,17 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>GLEW_STATIC; GLFW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\Huawei\Documents\OpenGL\GLFW\glfw-3.4\include;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GL;C:\Users\Huawei\source\repos\yutch123\OpenGL\x64\Debug;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLFW;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLEW\lib\Release\x64;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\lib-vc2015;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLEW\lib\Release\Win32;C:\Users\Huawei\Documents\OpenGL\OpenGL\Dependecies\include\GLFW;C:\Users\Huawei\Documents\OpenGL\OpenGL\Dependecies\include;C:\Users\Huawei\Documents\OpenGL\OpenGL\Dependecies\include\GLEW</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\Huawei\Documents\OpenGL\GLFW\glfw-3.4\build\src\Release;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\lib-vc2015;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLFW;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLEW\lib\Release\x64;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLEW\lib\Release\Win32;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies;C:\Users\Huawei\Documents\OpenGL\OpenGL\Dependecies\include</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;glew32.lib;user32.lib;gdi32.lib;shell32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

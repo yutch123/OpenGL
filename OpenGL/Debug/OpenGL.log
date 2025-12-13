@@ -1,1 +1,1 @@
-﻿  OpenGL.vcxproj -> C:\Users\Huawei\Documents\OpenGL\OpenGL\Debug\OpenGL.exe
+﻿LINK : fatal error LNK1104: cannot open file 'glfw3.lib'

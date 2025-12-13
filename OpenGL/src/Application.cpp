@@ -1,6 +1,47 @@
 ﻿#include <GL/glew.h> // должен идити первым, так как определяет различные используемые типы
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <fstream>
+#include <string>
+#include <sstream>
+
+struct ShaderProgramSource
+{
+    std::string VertexSource;
+    std::string FragmentSource;
+};
+
+static ShaderProgramSource ParseShader(const std::string& filepath) // парсим наш шейдер
+{
+    std::ifstream stream(filepath);
+
+    enum class ShaderType
+    {
+        NONE = -1, VERTEX = 0, FRAGMENT = 1
+    };
+
+    std::string line; // line содержит нашу фактическую строку
+    std::stringstream ss[2]; // создаем 2 разных строковых потока
+    ShaderType type = ShaderType::NONE;
+    // будем просматривать файл прострочно
+    while (getline(stream, line))
+    {
+        if (line.find("#shader") != std::string::npos) // содержит ли эта срочка пользовательский синаксический токен "shader"
+        {
+            // определем тип шейдера
+            if (line.find("vertex") != std::string::npos)
+                type = ShaderType::VERTEX;
+            else if (line.find("fragment") != std::string::npos)
+                type = ShaderType::FRAGMENT;
+        }
+        else
+        {
+            ss[(int)type] << line << '\n';
+        }
+    }
+
+    return { ss[0].str(), ss[1].str() };
+}
 
 static unsigned int CompileShader(unsigned int type, const std::string& source)
 {
@@ -106,26 +147,9 @@ int main(void)
                                                                            //  0 означает "начинать прямо с начала данных"
                                                                            //  Это БАЙТОВОЕ смещение, не указатель на CPU-данные.
 
-    std::string vertexShader =
-        "#version 330 core\n"
-        "\n"
-        "layout(location = 0) in vec2 position;\n"
-        "void main()\n"
-        "{\n"
-        "   gl_Position = vec4(position, 0.0, 1.0);\n"
-        "}\n";
 
-    std::string fragmentShader =
-        "#version 330 core\n"
-        "\n"
-        "layout(location = 0) out vec4 color;\n"
-        "\n"
-        "void main()\n"
-        "{\n"
-        "   color = vec4(1.0, 0.0, 0.0, 1.0);\n"
-        "}\n";
-
-    unsigned int shader = CreateShader(vertexShader, fragmentShader);
+    ShaderProgramSource source = ParseShader("res/shaders/Basic.shader");
+    unsigned int shader = CreateShader(source.VertexSource, source.FragmentSource);
     glUseProgram(shader);
 
 /* Loop until the user closes the window */
@@ -143,6 +167,8 @@ int main(void)
         /* Poll for and process events */
         glfwPollEvents();
     }
+
+    glDeleteProgram(shader);
 
     glfwTerminate();
     return 0;

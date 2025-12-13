@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\OpenGL",
-    "\\OpenGL\\src"
+    "\\OpenGL\\src",
+    "\\res",
+    "\\res\\shaders"
   ],
-  "SelectedNode": "\\OpenGL\\src\\Application.cpp",
   "PreviewInSolutionExplorer": false
 }
