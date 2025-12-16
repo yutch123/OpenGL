@@ -26,7 +26,7 @@ static ShaderProgramSource ParseShader(const std::string& filepath) // парс�
     // будем просматривать файл прострочно
     while (getline(stream, line))
     {
-        if (line.find("#shader") != std::string::npos) // содержит ли эта срочка пользовательский синаксический токен "shader"
+        if (line.find("#shader") != std::string::npos) // содержит ли эта срочка пользовательский синтаксический токен "shader"
         {
             // определем тип шейдера
             if (line.find("vertex") != std::string::npos)
@@ -110,10 +110,16 @@ int main(void)
 
     std::cout << glGetString(GL_VERSION) << std::endl;
 
-    float positions[6] = { // инициализируем массив
-        -0.5f, -0.5f,
-         0.0f,  0.5f,
-         0.5f, -0.5f,
+    float positions[] = { // инициализируем массив
+        -0.5f, -0.5f, // 0
+         0.5f, -0.5f, // 1
+         0.5f,  0.5f, // 2
+        -0.5f,  0.5f // 3
+    };
+
+    unsigned int indices[] = {
+        0, 1, 2,
+        2, 3, 0
     };
 
     unsigned int buffer;
@@ -123,7 +129,7 @@ int main(void)
     glBindBuffer(GL_ARRAY_BUFFER, buffer); // Делаем этот буфер "активным" для цели GL_ARRAY_BUFFER.
                                            // Теперь все операции glBufferData / glVertexAttribPointer будут относиться именно к этому буферу.
 
-    glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), positions, GL_STATIC_DRAW); // Копируем данные массива positions в видеопамять (в VBO).
+    glBufferData(GL_ARRAY_BUFFER, 6 * 2 * sizeof(float), positions, GL_STATIC_DRAW); // Копируем данные массива positions в видеопамять (в VBO).
                                                                                  // - GL_ARRAY_BUFFER указывает, куда копировать
                                                                                  // - 6 * sizeof(float) = размер данных (здесь 6 float → 12 байт)
                                                                                  // - positions — указатель на данные в RAM, откуда OpenGL заберёт копию
@@ -148,6 +154,11 @@ int main(void)
                                                                            //  Это БАЙТОВОЕ смещение, не указатель на CPU-данные.
 
 
+    unsigned int ibo; // индексный буферный обмен
+    glGenBuffers(1, &ibo);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_STATIC_DRAW);
+
     ShaderProgramSource source = ParseShader("res/shaders/Basic.shader");
     unsigned int shader = CreateShader(source.VertexSource, source.FragmentSource);
     glUseProgram(shader);
@@ -159,7 +170,7 @@ int main(void)
         glClear(GL_COLOR_BUFFER_BIT);
 
         // отрисовка треугольника
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
