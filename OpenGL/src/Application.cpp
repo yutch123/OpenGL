@@ -115,6 +115,10 @@ int main(void)
     if (!glfwInit())
         return -1;
 
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
     /* Create a windowed mode window and its OpenGL context */
     window = glfwCreateWindow(640, 480, "Window_OpenGL", NULL, NULL);
     if (!window)
@@ -145,6 +149,10 @@ int main(void)
         2, 3, 0
     };
 
+    unsigned int vao; // идентификатор объекта OpenGL
+    GLCall(glGenVertexArrays(1, &vao)); // OpenGL создает 1 Vertex Array Object
+    GLCall(glBindVertexArray(vao)); // Записывает этот ID в vao
+
     unsigned int buffer;
     GLCall(glGenBuffers(1, &buffer)); // Создаем буффер и получаем его ID
                               // пока это просто число, никакой памяти не выделено.
@@ -152,7 +160,7 @@ int main(void)
     GLCall(glBindBuffer(GL_ARRAY_BUFFER, buffer)); // Делаем этот буфер "активным" для цели GL_ARRAY_BUFFER.
                                            // Теперь все операции glBufferData / glVertexAttribPointer будут относиться именно к этому буферу.
 
-    GLCall(glBufferData(GL_ARRAY_BUFFER, 6 * 2 * sizeof(float), positions, GL_STATIC_DRAW)); // Копируем данные массива positions в видеопамять (в VBO).
+    GLCall(glBufferData(GL_ARRAY_BUFFER, 4 * 2 * sizeof(float), positions, GL_STATIC_DRAW)); // Копируем данные массива positions в видеопамять (в VBO).
                                                                                  // - GL_ARRAY_BUFFER указывает, куда копировать
                                                                                  // - 6 * sizeof(float) = размер данных (здесь 6 float → 12 байт)
                                                                                  // - positions — указатель на данные в RAM, откуда OpenGL заберёт копию
@@ -190,16 +198,26 @@ int main(void)
     ASSERT(location != -1); // программа не нашла нашу униформу
     GLCall(glUniform4f(location, 0.9f, 0.3f, 0.8f, 1.0f)); // устанавливаем значение цвета
 
+    GLCall(glBindVertexArray(0));
+    GLCall(glUseProgram(0));
+    GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0)); // привязываем буфер элементов
+    GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)); // привязываем буфер элементов
+
     float r = 0.0f;
     float increment = 0.05f;
 
-/* Loop until the user closes the window */
+    // Игровой цикл
     while (!glfwWindowShouldClose(window))
     {
         /* Render here */
         GLCall(glClear(GL_COLOR_BUFFER_BIT));
 
+        GLCall(glUseProgram(shader)); // привязываем шейдер и вызываем массив отрисовки
         GLCall(glUniform4f(location, r, 0.3f, 0.8f, 1.0f));
+
+        GLCall(glBindVertexArray(vao));
+        GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo)); // привязываем буфер индексов
+
         GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr)); // отрисовка треугольника
        
         if (r > 1.0f)
@@ -209,16 +227,17 @@ int main(void)
 
         r += increment;
 
-        /* Swap front and back buffers */
+        // Меняем буферы местами
         glfwSwapBuffers(window);
 
-        /* Poll for and process events */
+        // Функция glfwPollEvents проверяет были ли вызваны какие либо события (вроде ввода с клавиатуры или перемещение мыши) и вызывает установленные функции
+        // (которые мы можем установить через функции обратного вызова (callback)).
         glfwPollEvents();
     }
 
     glDeleteProgram(shader);
 
-    glfwTerminate();
+    glfwTerminate(); // Как только мы вышли из игрового цикла, надо очистить выделенные нам ресурсы
     return 0;
 }
 
