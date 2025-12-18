@@ -129,6 +129,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\Huawei\Documents\OpenGL\GLFW\glfw-3.4\build\src\Release;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\lib-vc2015;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLFW;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLEW\lib\Release\x64;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLEW\lib\Release\Win32;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies;C:\Users\Huawei\Documents\OpenGL\OpenGL\Dependecies\include</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;glew32.lib;user32.lib;gdi32.lib;shell32.lib</AdditionalDependencies>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -148,10 +150,20 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\Huawei\Documents\OpenGL\GLFW\glfw-3.4\build\src\Release;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\lib-vc2015;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLFW;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLEW\lib\Release\x64;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies\GLEW\lib\Release\Win32;C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\Dependecies;C:\Users\Huawei\Documents\OpenGL\OpenGL\Dependecies\include</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;glew32.lib;user32.lib;gdi32.lib;shell32.lib</AdditionalDependencies>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp" />
+    <ClCompile Include="src\IndexBuffer.cpp" />
+    <ClCompile Include="src\Renderer.cpp" />
+    <ClCompile Include="src\VertexBuffer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\IndexBuffer.h" />
+    <ClInclude Include="src\Renderer.h" />
+    <ClInclude Include="src\VertexBuffer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
