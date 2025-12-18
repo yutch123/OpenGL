@@ -1,12 +1,16 @@
 ﻿#include <GL/glew.h> // должен идити первым, так как определяет различные используемые типы
 #include <GLFW/glfw3.h>
+
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <sstream>
+
 #include "Renderer.h"
+
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
+#include "VertexArray.h"
 
 struct ShaderProgramSource
 {
@@ -137,27 +141,34 @@ int main(void)
         GLCall(glGenVertexArrays(1, &vao)); // OpenGL создает 1 Vertex Array Object
         GLCall(glBindVertexArray(vao)); // Записывает этот ID в vao
 
+        // Создаем объект VertexArray (VAO)
+        // VAO хранит информацию о том, КАК интерпретировать вершинные данные
+        VertexArray va;
+
+        /* Создаём VertexBuffer (VBO)
+        *  positions — массив float в CPU-памяти
+        *  4 * 2 * sizeof(float) — размер буфера в байтах
+        * (например: 4 вершины по 2 координаты: x, y)
+        */
         VertexBuffer vb(positions, 4 * 2 * sizeof(float));
 
+        /* Создаём объект BufferLayout
+        *  Он описывает структуру ОДНОЙ вершины
+        *  (какие атрибуты, их типы и размеры)
+        */
+        VertexBufferLayout layout;
 
-        GLCall(glEnableVertexAttribArray(0)); // Включаем атрибут №0 в VAO.
-                                      // Это говорит OpenGL: "данный атрибут будет использовать данные из VBO".
-                                      // Если не включить — шейдер не будет получать этот атрибут.
+        /* Добавляем в layout один атрибут:
+        *  тип float, 3 компоненты (x, y, z)
+        *  Это соответствует vec3 в вершинном шейдере
+        */
+        layout.Push<float>(2);
 
-        GLCall(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0)); // Описываем **формат данных**, которые будут читаться из VBO для атрибута №0.
-                                                                               // Параметры:
-                                                                               // (index = 0) — номер атрибута в шейдере (layout(location = 0))
-                                                                               // (size = 2) — атрибут состоит из 2 компонентов (например, vec2: x, y)
-                                                                               // (type = GL_FLOAT) — каждый компонент — float
-                                                                               // (normalized = GL_FALSE) — float НЕ нормализуем (нормализация нужна для целочисленных типов)
-                                                                               // (stride = sizeof(float) * 2) — расстояние между началом двух последовательных вершин:
-                                                                               // [x y] [x y] [x y] ...
-                                                                               //  Каждая вершина занимает 8 байт (2 float)
-                                                                               //  Поэтому stride = 8
-                                                                               // (pointer = 0) — смещение внутри VBO, откуда начинается первый атрибут.
-                                                                               //  0 означает "начинать прямо с начала данных"
-                                                                               //  Это БАЙТОВОЕ смещение, не указатель на CPU-данные.
-
+        /* Передаём layout в VAO
+        *  Здесь вызываются glEnableVertexAttribArray и glVertexAttribPointer
+        *  VAO запоминает, как читать данные из VBO
+        */
+        va.AddBuffer(vb, layout);
 
         IndexBuffer ib(indices, 6);
 
@@ -186,7 +197,7 @@ int main(void)
             GLCall(glUseProgram(shader)); // привязываем шейдер и вызываем массив отрисовки
             GLCall(glUniform4f(location, r, 0.3f, 0.8f, 1.0f));
 
-            GLCall(glBindVertexArray(vao)); // делем объект VAO активным
+            va.Bind();
             ib.Bind();
 
             GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr)); // отрисовка треугольника
