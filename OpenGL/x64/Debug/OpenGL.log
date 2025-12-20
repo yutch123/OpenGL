@@ -1,5 +1,7 @@
 ﻿  Application.cpp
-  VertexArray.cpp
-C:\Users\Huawei\source\repos\yutch123\OpenGL\OpenGL\src\VertexArray.cpp(25,1): warning C4312: 'type cast': conversion from 'unsigned int' to 'const void *' of greater size
+  Shader.cpp
   Generating Code...
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\Users\Huawei\source\repos\yutch123\OpenGL\x64\Debug\vc120.pdb'; linking object as if no debug info
   OpenGL.vcxproj -> C:\Users\Huawei\source\repos\yutch123\OpenGL\x64\Debug\OpenGL.exe
